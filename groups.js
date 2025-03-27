@@ -6,15 +6,27 @@ const displaygroups = document.querySelector('#musicgroups');
 
 let displaGroupName = document.querySelector("#groupName");
 
+let displayCurrentPage = document.querySelector("#currentPage");
+
+let nextPage = document.querySelector("#nextPage");
+nextPage.addEventListener("click", getNextPage)
+
+let previousPAge = document.querySelector("#previousPage");
+previousPAge.addEventListener("click", getPreviousPage)
+
+let searchButton = document.querySelector("#searchButton");
+searchButton.addEventListener("click", getSearchedGroup)
+
+let inputField = document.querySelector("#inputField");
 
 
-async function getMusicGroups () {
+
+async function getMusicGroups() {
 
     try {
-console.log(`fetch data from pagenr ${pageNr}`);
 
         let apiresponse = await fetch(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api/MusicGroup/Read?seeded=true&flat=false&pageNr=${pageNr}&pageSize=10`);
-        
+
         if (!apiresponse.ok) {
 
             throw new Error("Something went wrong in API response");
@@ -23,25 +35,70 @@ console.log(`fetch data from pagenr ${pageNr}`);
         let data = await apiresponse.json();
 
         const groups = data.pageItems;
+
         fillList(groups);
 
         return data;
+
     }
 
     catch (error) {
         console.log(error);
     }
 };
-getMusicGroups();
 
-function getNewPage() {
-  
-    pageNr++;
-    console.log(`ska öka pagenr vilket nu är ${pageNr}`);
-    getMusicGroups();
+async function getSearchedGroup() {
+
+    let searchedGroup = inputField.value;
+
+    if (searchedGroup === "") {
+        getMusicGroups();
+    }
+
+    try {
+
+        let apiresponse = await fetch(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api/MusicGroup/Read?seeded=true&flat=false&filter=${searchedGroup}&pageSize=10`)
+
+        if (!apiresponse.ok) {
+            throw new Error ("Something went wrong in searched api");
+        }
+
+        let data = await apiresponse.json();
+
+        const groups = data.pageItems;
+
+        fillList(groups);
+
+        return data;
+
+    }
+    catch (error) {
+        console.log (error);
+    }
 }
 
+async function getNextPage() {
+    pageNr++;
+    displayCurrentPage.innerText = `Page: ${pageNr}`;
+    await getMusicGroups();
+}
+
+async function getPreviousPage() {
+    pageNr--;
+    displayCurrentPage.innerText = `Page: ${pageNr}`;
+
+    if (pageNr < 0) {
+        alert("You're at the start of the list");
+        pageNr = 0; 
+        displayCurrentPage.innerText = `Page: ${pageNr}`;
+    }
+    await getMusicGroups();
+}
+
+
 function fillList(data) {
+
+    displaygroups.innerHTML = "";
 
     data.forEach(element => {
         const row = createRow();
@@ -52,7 +109,7 @@ function fillList(data) {
             window.location.href = `aboutgroups.html?musicGroupId=${element.musicGroupId}`;
         })
         displaygroups.appendChild(row);
-        
+
     });
 
 }
@@ -65,6 +122,11 @@ function createRow() {
 }
 
 
+(async () => {
+    
+    await getMusicGroups();
+
+})()
 
 
 
