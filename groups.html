@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -63,12 +63,12 @@
             <a href="/"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <span class="fs-4">Severin Music Library</span>
-                
+
             </a>
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="/groups.html" class="nav-link">List of items</a></li>
+                <li class="nav-item"><a href="/groups.html" class="nav-link">List of groups</a></li>
             </ul>
             </li>
             </ul>
@@ -77,7 +77,8 @@
     <div class="container px-4 py-4" id="list-of-groups">
         <h2 class="pb-2 border-bottom">List of Music bands</h2>
 
-        <p>Below are some of the worlds most famous Music bands.</p>
+        <p> Numbers of music groups found: <span> <label for="amountOfGroups" class="form-label" id="currentAmount">Amount</label>
+            </span></p>
 
         <form method="post" class="needs-validation" method="post" novalidate>
 
@@ -89,7 +90,8 @@
                                 <input class="form-control" type="search" placeholder="Search" id="inputField">
                             </div>
                             <div class="col-md-2 ">
-                                <button class="btn btn-outline-success" type="button" id="searchButton"> <a href=""></a>Search</button>
+                                <button class="btn btn-outline-success" type="button" id="searchButton"> <a
+                                        href=""></a>Search</button>
                             </div>
                         </div>
                     </div>
@@ -99,28 +101,31 @@
                         <div class="col-md-10 themed-grid-head-col">Group Name</div>
                     </div>
 
-                    <div class="row md-10 text-center"  id="musicgroups"> <a href="#"></a>
+                    <div class="row md-10 text-center" id="musicgroups"> <a href="#"></a>
                         <div class="col-md-10 themed-grid-head-col d-none">
 
                         </div>
                     </div>
 
 
-                   
+
                 </div>
                 <nav aria-label="Standard pagination example">
                     <ul class="pagination">
                         <li class="page-item">
-                            <a class="page-link bg-secondary text-white border-secondary"href="#list-of-musicgroups" id="previousPage">
+                            <a class="page-link bg-secondary text-white border-secondary" href="#list-of-musicgroups"
+                                id="previousPage">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
-                        <li class="page-item"><a class="page-link bg-secondary text-white border-secondary" href="#list-of-musicgroups" id="currentPage">Page: 0</a></li>
-                        
-                        
+                        <li class="page-item"><a class="page-link bg-secondary text-white border-secondary"
+                                href="#list-of-musicgroups" id="currentPage">Page: 0</a></li>
+
+
 
                         <li class="page-item">
-                            <button type="button" class="page-link bg-secondary text-white border-secondary" aria-label="Next" id="nextPage">
+                            <button type="button" class="page-link bg-secondary text-white border-secondary"
+                                aria-label="Next" id="nextPage">
                                 <span aria-hidden="true">&raquo;</span>
                             </button>
                         </li>

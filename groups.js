@@ -19,6 +19,9 @@ searchButton.addEventListener("click", getSearchedGroup)
 
 let inputField = document.querySelector("#inputField");
 
+let currentAmountOfMusicgroups = document.querySelector("#currentAmount");
+
+
 
 // Fetch all the music groups in each specific page.
 async function getMusicGroups() {
@@ -35,6 +38,8 @@ async function getMusicGroups() {
         let data = await apiresponse.json();
 
         const groups = data.pageItems;
+        currentAmountOfMusicgroups.innerText = data.dbItemsCount;
+
 
         fillList(groups);
 
@@ -67,6 +72,8 @@ async function getSearchedGroup() {
         let data = await apiresponse.json();
 
         const groups = data.pageItems;
+        currentAmountOfMusicgroups.innerText = data.dbItemsCount;
+
 
         fillList(groups);
 
