@@ -20,7 +20,7 @@ searchButton.addEventListener("click", getSearchedGroup)
 let inputField = document.querySelector("#inputField");
 
 
-
+// Fetch all the music groups in each specific page.
 async function getMusicGroups() {
 
     try {
@@ -47,6 +47,7 @@ async function getMusicGroups() {
     }
 };
 
+// Gets the searched group
 async function getSearchedGroup() {
 
     let searchedGroup = inputField.value;
@@ -57,10 +58,10 @@ async function getSearchedGroup() {
 
     try {
 
-        let apiresponse = await fetch(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api/MusicGroup/Read?seeded=true&flat=false&filter=${searchedGroup}&pageSize=10`)
+        let apiresponse = await fetch(`https://seido-webservice-307d89e1f16a.azurewebsites.net/api/MusicGroup/Read?seeded=true&flat=false&filter=${searchedGroup}&pageNr=${pageNr}&pageSize=10`)
 
         if (!apiresponse.ok) {
-            throw new Error ("Something went wrong in searched api");
+            throw new Error("Something went wrong in searched api");
         }
 
         let data = await apiresponse.json();
@@ -73,14 +74,20 @@ async function getSearchedGroup() {
 
     }
     catch (error) {
-        console.log (error);
+        console.log(error);
     }
 }
 
+// Gets page either with default values or with the groups that match current search. 
 async function getNextPage() {
     pageNr++;
     displayCurrentPage.innerText = `Page: ${pageNr}`;
-    await getMusicGroups();
+    if (getSearchedGroup) {
+        await getSearchedGroup();
+    }
+    else {
+        await getMusicGroups();
+    }
 }
 
 async function getPreviousPage() {
@@ -89,10 +96,16 @@ async function getPreviousPage() {
 
     if (pageNr < 0) {
         alert("You're at the start of the list");
-        pageNr = 0; 
+        pageNr = 0;
         displayCurrentPage.innerText = `Page: ${pageNr}`;
     }
-    await getMusicGroups();
+    else if (getSearchedGroup) {
+        await getSearchedGroup();
+    }
+    else {
+        await getMusicGroups();
+
+    }
 }
 
 
@@ -123,7 +136,7 @@ function createRow() {
 
 
 (async () => {
-    
+
     await getMusicGroups();
 
 })()

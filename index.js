@@ -2,6 +2,8 @@ let displayAmountOfAlbums = document.querySelector("#amountOfAlbum");
 let displayAmountOfArtists = document.querySelector("#amountOfArtists");
 let displayAmountOfGroups = document.querySelector("#amountOfGroups");
 
+
+// Shows amount of albums, artists and groups in API
 (async () => {
     try {
         let apiresponse = await fetch ("https://seido-webservice-307d89e1f16a.azurewebsites.net/api/Guest/Info")

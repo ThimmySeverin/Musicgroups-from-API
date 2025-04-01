@@ -7,6 +7,7 @@ const artistGroup = document.querySelector("#artistName");
 const albumName = document.querySelector("#albumName");
 const albumYear = document.querySelector("#albumYear")
 
+// Gets info about the clicked musicgroup
 async function getMusicInfo() {
 
     try {
@@ -62,6 +63,7 @@ function allAlbums(data) {
 }
 
 
+// Creates a new row for each artist in the group, every album and year they realeased it. 
 function createRow() {
     const div = document.createElement("div");
     div.classList.add('col-md-12', 'themed-grid-col');
